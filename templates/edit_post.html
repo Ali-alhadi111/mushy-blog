@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Post - Mushy Blog{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="card">
+        <h2 style="text-align: center; margin-bottom: 30px; color: #333;">
+            <i class="fas fa-edit"></i> Edit Your Post
+        </h2>
+        
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title" class="form-label">
+                    <i class="fas fa-heading"></i> Post Title
+                </label>
+                <input type="text" id="title" name="title" class="form-input" required 
+                       value="{{ post.title }}">
+            </div>
+            
+            <div class="form-group">
+                <label for="image" class="form-label">
+                    <i class="fas fa-image"></i> Featured Image
+                </label>
+                {% if post.image_url %}
+                    <div style="margin-bottom: 15px;">
+                        <p style="color: #666; margin-bottom: 10px;">Current image:</p>
+                        <img src="{{ url_for('static', filename=post.image_url) }}" 
+                             alt="{{ post.title }}" style="max-width: 200px; border-radius: 10px;">
+                    </div>
+                {% endif %}
+                <div class="image-upload">
+                    <input type="file" id="image" name="image" accept="image/*" style="display: none;">
+                    <div>
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #667eea; margin-bottom: 10px;"></i>
+                        <p>Click to upload a new image or drag and drop</p>
+                        <p style="font-size: 0.9rem; color: #666;">PNG, JPG, GIF up to 16MB</p>
+                    </div>
+                </div>
+                <img class="image-preview" style="display: none;">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-code"></i> Content (Markdown Supported)
+                </label>
+                <div class="markdown-editor">
+                    <div class="editor-tabs">
+                        <button type="button" class="editor-tab active" data-target="write">
+                            <i class="fas fa-edit"></i> Write
+                        </button>
+                        <button type="button" class="editor-tab" data-target="preview">
+                            <i class="fas fa-eye"></i> Preview
+                        </button>
+                    </div>
+                    
+                    <div class="editor-content active" data-content="write">
+                        <textarea name="content" class="editor-textarea" required>{{ post.content }}</textarea>
+                    </div>
+                    
+                    <div class="editor-content" data-content="preview">
+                        <div class="editor-preview">
+                            <p style="color: #666; text-align: center; padding: 50px;">
+                                <i class="fas fa-eye"></i><br>
+                                Preview will appear here as you type
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Update Post
+                </button>
+                <a href="{{ url_for('view_post', post_id=post.id) }}" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

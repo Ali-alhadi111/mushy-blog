@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - Mushy Blog{% endblock %}
+
+{% block content %}
+<div class="post-detail">
+    <div class="card post-card">
+        <div class="post-header">
+            <div>
+                <h1 class="post-title" style="font-size: 2.5rem; margin-bottom: 15px;">{{ post.title }}</h1>
+                <div class="post-meta">
+                    <span><i class="fas fa-user"></i> {{ post.author.username }}</span>
+                    <span><i class="fas fa-calendar"></i> {{ post.created_at.strftime('%B %d, %Y at %I:%M %p') }}</span>
+                    {% if post.updated_at != post.created_at %}
+                        <span><i class="fas fa-edit"></i> Updated {{ post.updated_at.strftime('%B %d, %Y') }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        {% if post.image_url %}
+            <div style="margin-bottom: 30px;">
+                <img src="{{ url_for('static', filename=post.image_url) }}" 
+                     alt="{{ post.title }}" 
+                     style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            </div>
+        {% endif %}
+        
+        <div class="post-content" style="font-size: 1.1rem; line-height: 1.8;">
+            {{ post.content_html|safe }}
+        </div>
+        
+        <div class="post-actions" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
+            {% if current_user.is_authenticated %}
+                <button class="btn btn-like {% if user_liked %}liked{% endif %}" data-post-id="{{ post.id }}">
+                    <i class="fas fa-heart"></i> 
+                    <span class="like-count">{{ post.likes|length }}</span> 
+                    {% if post.likes|length == 1 %}Like{% else %}Likes{% endif %}
+                </button>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-like">
+                    <i class="far fa-heart"></i> 
+                    <span class="like-count">{{ post.likes|length }}</span> 
+                    {% if post.likes|length == 1 %}Like{% else %}Likes{% endif %}
+                </a>
+            {% endif %}
+            
+            <span style="color: #666; margin: 0 20px;">
+                <i class="fas fa-comments"></i> {{ post.comments|length }} 
+                {% if post.comments|length == 1 %}Comment{% else %}Comments{% endif %}
+            </span>
+            
+            {% if current_user.is_authenticated and current_user.id == post.user_id %}
+                <a href="{{ url_for('edit_post', post_id=post.id) }}" class="btn btn-secondary">
+                    <i class="fas fa-edit"></i> Edit Post
+                </a>
+                <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-danger" 
+                   onclick="return confirm('Are you sure you want to delete this post?')">
+                    <i class="fas fa-trash"></i> Delete Post
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Comments Section -->
+    <div class="comments-section">
+        <h3 style="color: #333; margin-bottom: 20px;">
+            <i class="fas fa-comments"></i> Comments
+        </h3>
+        
+        {% if current_user.is_authenticated %}
+            <div class="card" style="margin-bottom: 30px;">
+                <h4 style="margin-bottom: 15px; color: #333;">
+                    <i class="fas fa-comment-plus"></i> Add a Comment
+                </h4>
+                <form method="POST" action="{{ url_for('add_comment', post_id=post.id) }}">
+                    <div class="form-group">
+                        <textarea name="content" class="form-textarea" required 
+                                  placeholder="Share your thoughts..." style="min-height: 100px;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Post Comment
+                    </button>
+                </form>
+            </div>
+        {% else %}
+            <div class="card" style="margin-bottom: 30px; text-align: center; padding: 30px;">
+                <p style="color: #666; margin-bottom: 20px;">
+                    <i class="fas fa-lock"></i> Please log in to leave a comment
+                </p>
+                <a href="{{ url_for('login') }}" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+            </div>
+        {% endif %}
+        
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">
+                            <i class="fas fa-user"></i> {{ comment.author.username }}
+                        </span>
+                        <span class="comment-date">
+                            {{ comment.created_at.strftime('%B %d, %Y at %I:%M %p') }}
+                        </span>
+                    </div>
+                    <div class="comment-content">
+                        {{ comment.content|replace('\n', '<br>')|safe }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="card" style="text-align: center; padding: 40px;">
+                <i class="fas fa-comment-slash" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
+                <h4 style="color: #666; margin-bottom: 10px;">No comments yet!</h4>
+                <p style="color: #999;">Be the first to share your thoughts on this post.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Back to Posts -->
+<div style="text-align: center; margin-top: 40px;">
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to All Posts
+    </a>
+</div>
+{% endblock %}
