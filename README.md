@@ -1,8 +1,8 @@
-# 🚀 Mushy Blog
+#  Mushy Blog
 
-A modern, fun, and feature-rich blog platform built with Flask! Share your thoughts, stories, and ideas with the world in style.
+A blog platform built with Flask! Share your thoughts, stories, and ideas with the world in style.
 
-## ✨ Features
+##  Features
 
 - **User Authentication**: Sign up, login, and secure user management
 - **Rich Post Creation**: Markdown editor with live preview
@@ -14,7 +14,7 @@ A modern, fun, and feature-rich blog platform built with Flask! Share your thoug
 - **Post Management**: Create, edit, and delete your posts
 - **User Profiles**: Personal dashboard with post statistics
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Backend**: Flask (Python)
 - **Database**: SQLite with SQLAlchemy ORM
@@ -24,7 +24,7 @@ A modern, fun, and feature-rich blog platform built with Flask! Share your thoug
 - **Image Processing**: Pillow (PIL)
 - **Security**: Werkzeug password hashing, HTML sanitization
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -76,7 +76,7 @@ Blog/
 └── blog.db              # SQLite database (created automatically)
 ```
 
-## 🎨 Features in Detail
+##  Features in Detail
 
 ### Markdown Editor
 - Live preview of your markdown content
@@ -102,7 +102,7 @@ Blog/
 - File upload validation
 - User authentication required for sensitive actions
 
-## 🎯 Usage
+##  Usage
 
 1. **Register** a new account or **login** with existing credentials
 2. **Create** your first post using the markdown editor
@@ -110,7 +110,7 @@ Blog/
 4. **Interact** with other posts by liking and commenting
 5. **Manage** your posts from your profile page
 
-## 🎨 Customization
+##  Customization
 
 The design is built with modern CSS features:
 - CSS Grid and Flexbox for layouts
@@ -120,7 +120,7 @@ The design is built with modern CSS features:
 
 You can easily customize colors, fonts, and animations by modifying the CSS variables in `static/css/style.css`.
 
-## 🔧 Configuration
+## � Configuration
 
 Key configuration options in `app.py`:
 - `SECRET_KEY`: Change this for production
@@ -128,7 +128,7 @@ Key configuration options in `app.py`:
 - `MAX_CONTENT_LENGTH`: Maximum file upload size
 - Database URI: Currently set to SQLite
 
-## 🚀 Deployment
+##  Deployment
 
 For production deployment:
 
@@ -138,11 +138,7 @@ For production deployment:
 4. Use a WSGI server (Gunicorn)
 5. Configure environment variables for sensitive data
 
-## 🤝 Contributing
 
-Feel free to fork this project and submit pull requests for improvements!
-
-## 📝 License
 
 This project is open source and available under the MIT License.
 
