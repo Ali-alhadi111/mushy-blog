@@ -88,7 +88,7 @@ A blog platform built with Flask! Share your thoughts, stories, and ideas with t
 
 
 
-## � Configuration
+## Configuration
 
 Key configuration options in `app.py`:
 - `SECRET_KEY`: Change this for production
