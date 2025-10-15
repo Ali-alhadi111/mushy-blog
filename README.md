@@ -51,30 +51,6 @@ A blog platform built with Flask! Share your thoughts, stories, and ideas with t
 4. **Open your browser**
    Navigate to `http://localhost:5001`
 
-## 📁 Project Structure
-
-```
-Blog/
-├── app.py                 # Main Flask application
-├── requirements.txt       # Python dependencies
-├── README.md             # This file
-├── templates/            # HTML templates
-│   ├── base.html         # Base template
-│   ├── index.html        # Home page
-│   ├── login.html        # Login page
-│   ├── register.html     # Registration page
-│   ├── create_post.html  # Post creation
-│   ├── edit_post.html    # Post editing
-│   ├── view_post.html    # Post view with comments
-│   └── profile.html      # User profile
-├── static/               # Static files
-│   ├── css/
-│   │   └── style.css     # Main stylesheet
-│   ├── js/
-│   │   └── main.js       # JavaScript functionality
-│   └── uploads/          # User uploaded images
-└── blog.db              # SQLite database (created automatically)
-```
 
 ##  Features in Detail
 
@@ -110,15 +86,7 @@ Blog/
 4. **Interact** with other posts by liking and commenting
 5. **Manage** your posts from your profile page
 
-##  Customization
 
-The design is built with modern CSS features:
-- CSS Grid and Flexbox for layouts
-- CSS custom properties for theming
-- Smooth animations and transitions
-- Gradient backgrounds and glassmorphism effects
-
-You can easily customize colors, fonts, and animations by modifying the CSS variables in `static/css/style.css`.
 
 ## � Configuration
 
@@ -128,20 +96,3 @@ Key configuration options in `app.py`:
 - `MAX_CONTENT_LENGTH`: Maximum file upload size
 - Database URI: Currently set to SQLite
 
-##  Deployment
-
-For production deployment:
-
-1. Change the `SECRET_KEY` to a secure random string
-2. Use a production database (PostgreSQL recommended)
-3. Set up a reverse proxy (nginx)
-4. Use a WSGI server (Gunicorn)
-5. Configure environment variables for sensitive data
-
-
-
-This project is open source and available under the MIT License.
-
----
-
-**Made with ❤️ and lots of fun!** 🎉
